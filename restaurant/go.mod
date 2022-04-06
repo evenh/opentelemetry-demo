@@ -1,6 +1,6 @@
 module github.com/evenh/opentelemetry-demo/restaurant
 
-go 1.17
+go 1.18
 
 replace github.com/streadway/amqp v1.2.4 => github.com/rabbitmq/amqp091-go v1.3.0
 
