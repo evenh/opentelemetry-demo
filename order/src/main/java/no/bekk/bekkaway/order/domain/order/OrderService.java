@@ -4,6 +4,8 @@ import static no.bekk.bekkaway.order.config.RabbitConfig.TOPIC_EXCHANGE_NAME;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import no.bekk.bekkaway.order.config.RabbitConfig.RoutingKey;
 import no.bekk.bekkaway.order.domain.menu.Menu;
 import no.bekk.bekkaway.order.domain.order.dto.CreateOrderRequest;
@@ -72,5 +74,9 @@ public class OrderService {
 
   public List<Order> findAll() {
     return repository.findAll();
+  }
+
+  public Optional<Order> findOne(String id) {
+    return repository.findById(UUID.fromString(id));
   }
 }

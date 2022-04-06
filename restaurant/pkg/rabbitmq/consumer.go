@@ -179,7 +179,11 @@ func (c *OrdersConsumer) updateStatus(ctx context.Context, status *domain.Status
 		return errors.Wrap(err, "could not serialize status")
 	}
 
-	spanCtx, span := c.tracer.Start(ctx, "OrdersConsumer.updateStatus")
+	spanCtx, span := c.tracer.Start(ctx, "OrdersConsumer.updateStatus", trace.WithAttributes(
+		attribute.String("new-status", status.NewStatus),
+		attribute.String("order-id", status.OrderId),
+	))
+
 	logger := c.logger.WithField("order-id", status.OrderId).WithField("trace-id", span.SpanContext().TraceID()).WithField("span-id", span.SpanContext().SpanID())
 
 	logger.Debugf("setting status to %s", status.NewStatus)
